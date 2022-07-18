@@ -20,7 +20,9 @@ services:
     ports:
       - 1883:1883
     volumes:
-      - ${USERDIR}/mosquitto:/mosquitto
+      - ${USERDIR}/mosquitto/config:/mosquitto/config
+      - ${USERDIR}/mosquitto/data:/mosquitto/data
+      - ${USERDIR}/mosquitto/log:/mosquitto/log
 
   homeassistant:
     container_name: homeassistant
