@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    volumes:
+      - ${USERDIR}/mariadb:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+    volumes:
+      - ${USERDIR}/mosquitto:/mosquitto
+
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant:latest
+    volumes:
+      - ${USERDIR}/homeassistant/config:/config
+    depends_on:
+      - mariadb
+      - mosquitto
+    ports:
+      - "8123:8123"
+      - "6666:6666/udp" #localtuya
+      - "6667:6667/udp" #localtuya
+      - "136:136/udp"
+    expose:
+      - 6666/udp
+      - 6667/udp
+    restart: always
