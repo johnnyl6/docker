@@ -49,3 +49,22 @@ services:
       - "9900:80"
     volumes:
       - ${USERDIR}/tasmoadmin:/data
+
+  tasmobackup:
+    image: "danmed/tasmobackupv1"
+    container_name: tasmobackup
+    ports:
+      - "8259:80"
+    volumes:
+      - ${USERDIR}/tasmobackup:/var/www/html/data
+    environment:
+      # MYSQL env's are not needed if you are using sqlite
+      # - MYSQL_SERVER=192.168.1.4:3307
+      # - MYSQL_USERNAME=tasmo
+      # - MYSQL_PASSWORD=y3&ZKH2W7QTf
+      # change below to mysql if you don't want to use sqlite
+      # you will need to have a mysql server (set above) with a blank database already created.
+      - DBTYPE=sqlite
+      # if using Mysql remove the data/ from the below line
+      # if using Sqlite the data/ is required!
+      - DBNAME=data/tasmobackup 
