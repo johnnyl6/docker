@@ -41,3 +41,11 @@ services:
       - 6666/udp
       - 6667/udp
     restart: always
+
+  tasmoadmin:
+    container_name: tasmoadmin
+    image: raymondmm/tasmoadmin:latest
+    ports:
+      - "9900:80"
+    volumes:
+      - ${USERDIR}/tasmoadmin:/data
