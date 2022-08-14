@@ -32,6 +32,8 @@ services:
     depends_on:
       - mariadb
       - mosquitto
+    networks:
+      - traefik-network
     ports:
       - "8123:8123"
       - "6666:6666/udp" #localtuya
@@ -41,6 +43,11 @@ services:
       - 6666/udp
       - 6667/udp
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homeassistant.rule=Host(`${HOST_NAME}`)"
+      - "traefik.http.routers.homeassistant.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant.tls.certresolver=myresolver"
 
   tasmoadmin:
     container_name: tasmoadmin
@@ -68,3 +75,7 @@ services:
       # if using Mysql remove the data/ from the below line
       # if using Sqlite the data/ is required!
       - DBNAME=data/tasmobackup 
+
+networks:
+  traefik-network:
+    external: true
