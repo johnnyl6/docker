@@ -64,6 +64,18 @@ services:
       # if using Mysql remove the data/ from the below line
       # if using Sqlite the data/ is required!
       - DBNAME=data/tasmobackup 
+
+  webtrees:
+    container_name: webtrees
+    image: "dtjs48jkt/webtrees"
+    restart: always
+    volumes:
+      - ${USERDIR}/webtrees/data:/var/www/html/data
+    ports:
+      - 8088:80
+    environment:
+      - DISABLE_SSL=TRUE
+      - PORT=80
       
   traefik:
     container_name: traefik
@@ -91,6 +103,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - ${USERDIR}/traefik:/etc/traefik
+
+  
 
 networks:
   traefik-network:
