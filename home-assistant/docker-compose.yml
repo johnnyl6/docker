@@ -76,6 +76,8 @@ services:
     environment:
       - DISABLE_SSL=TRUE
       - PORT=80
+      - BASE_URL=https://${TREE_HOST_NAME}
+      - PRETTYURLS=TRUE
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.webtrees.rule=Host(`${TREE_HOST_NAME}`)"
