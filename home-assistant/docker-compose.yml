@@ -76,7 +76,27 @@ services:
     environment:
       - DISABLE_SSL=TRUE
       - PORT=80
-      
+
+  adguardhome:
+    container_name: adguardhome
+    image: adguard/adguardhome:latest
+    restart: always
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8888:80"
+      # - '3003:3000'
+      # - '67:67/udp'
+      # - '67:67/tcp'
+      # - '68:68/udp'
+      # - '443:443/tcp'
+      # - '853:853/tcp'
+      # - '3003:3000/tcp'
+    volumes:
+      - ${USERDIR}/adguardhome/work:/opt/adguardhome/work
+      - ${USERDIR}/adguardhome/conf:/opt/adguardhome/conf
+      - ${USERDIR}/adguardhome/certs:/opt/adguardhome/certs:ro
+
   traefik:
     container_name: traefik
     image: "traefik:latest"
