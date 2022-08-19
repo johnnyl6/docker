@@ -33,7 +33,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homeassistant.rule=Host(`${HOST_NAME}`)"
+      - "traefik.http.routers.homeassistant.rule=Host(`${HA_HOST_NAME}`)"
       - "traefik.http.routers.homeassistant.entrypoints=websecure"
       - "traefik.http.routers.homeassistant.tls.certresolver=myresolver"
       - traefik.http.services.homeassistant.loadbalancer.server.port=8123
@@ -76,6 +76,12 @@ services:
     environment:
       - DISABLE_SSL=TRUE
       - PORT=80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.webtrees.rule=Host(`${TREE_HOST_NAME}`)"
+      - "traefik.http.routers.webtrees.entrypoints=websecure"
+      - "traefik.http.routers.webtrees.tls.certresolver=myresolver"
+      - traefik.http.services.webtrees.loadbalancer.server.port=8088
 
   adguardhome:
     container_name: adguardhome
