@@ -110,8 +110,6 @@ services:
     image: "traefik:latest"
     command:
       #- "--log.level=DEBUG"
-      - --traefikLog.filePath=/etc/traefik/traefik.log
-      - --accessLog.filePath=/etc/traefik/access.log
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
