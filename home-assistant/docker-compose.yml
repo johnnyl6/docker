@@ -73,6 +73,8 @@ services:
       - ${USERDIR}/webtrees/data:/var/www/html/data
     ports:
       - 8088:80
+    networks:
+      - traefik-network      
     environment:
       - DISABLE_SSL=TRUE
       - PORT=80
