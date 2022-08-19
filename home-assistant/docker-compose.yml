@@ -71,19 +71,21 @@ services:
     restart: always
     volumes:
       - ${USERDIR}/webtrees/data:/var/www/html/data
-    ports:
-      - 8088:80
+    # ports:
+    #   - 8088:80
     networks:
       - traefik-network      
     environment:
       - DISABLE_SSL=TRUE
-      - PORT=8088
+      - PORT=80
+      - BASE_URL=https://${TREE_HOST_NAME}
+      - PRETTY_URLS=TRUE
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.webtrees.rule=Host(`${TREE_HOST_NAME}`)"
       - "traefik.http.routers.webtrees.entrypoints=websecure"
       - "traefik.http.routers.webtrees.tls.certresolver=myresolver"
-      - traefik.http.services.webtrees.loadbalancer.server.port=8088
+      - traefik.http.services.webtrees.loadbalancer.server.port=80
 
   adguardhome:
     container_name: adguardhome
