@@ -156,7 +156,7 @@ services:
       - "5000:5000"
       - "1935:1935" # RTMP feeds
     environment:
-      FRIGATE_RTSP_PASSWORD: $(FRIGATE_RTSP_PASSWORD)
+      FRIGATE_RTSP_PASSWORD: ${FRIGATE_RTSP_PASSWORD}
 
 networks:
   traefik-network:
