@@ -63,7 +63,7 @@ services:
       - DBTYPE=sqlite
       # if using Mysql remove the data/ from the below line
       # if using Sqlite the data/ is required!
-      - DBNAME=data/tasmobackup 
+      - DBNAME=data/tasmobackup
 
   webtrees:
     container_name: webtrees
@@ -74,7 +74,7 @@ services:
     # ports:
     #   - 8088:80
     networks:
-      - traefik-network      
+      - traefik-network
     environment:
       - DISABLE_SSL=TRUE
       - PORT=80
@@ -159,6 +159,18 @@ services:
     environment:
       FRIGATE_RTSP_PASSWORD: ${FRIGATE_RTSP_PASSWORD}
 
+  homer:
+    image: b4bz/homer
+    #To build from source, comment previous line and uncomment below
+    #build: .
+    container_name: homer
+    volumes:
+      - ${USERDIR}/homer/:/www/assets
+    ports:
+      - 8081:8080
+    user: 1000:1000 # default
+    environment:
+      - INIT_ASSETS=1 # default
 
 networks:
   traefik-network:
