@@ -1,0 +1,70 @@
+version: "3.7"
+
+services:
+  adguardhome:
+    container_name: adguardhome
+    image: adguard/adguardhome:latest
+    restart: always
+    # networks:
+    #  - adguard_network
+    # network_mode: host
+    ports:
+      - "53:53/tcp" # dns
+      - "53:53/udp" # dns
+      - "67:67/udp" # dhcp
+      - "67:67/tcp" # dhcp
+      - "80:80" # web portal
+      # - '68:68/udp'
+      # - '443:443/tcp'  # DNS over https
+      # - '853:853/tcp'    # DNS over TLS
+      # - "3000:3000/tcp"
+    volumes:
+      - ${USERDIR}/docker/adguard/work:/opt/adguardhome/work
+      - ${USERDIR}/docker/adguard/conf:/opt/adguardhome/conf
+      - ${USERDIR}/docker/adguard/certs:/opt/adguardhome/certs:ro
+
+  portainer-agent:
+    container_name: portainer_agent
+    image: portainer/agent:latest
+    restart: always
+    ports:
+      - 9001:9001
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/snap/docker/common/var-lib-docker/volumes:/var/lib/docker/volumes
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+    volumes:
+      - ${USERDIR}/docker/mosquitto:/mosquitto
+
+  zwavejs2mqtt:
+    container_name: zwavejs2mqtt
+    image: zwavejs/zwavejs2mqtt:latest
+    restart: always
+    tty: true
+    stop_signal: SIGINT
+    environment:
+      - SESSION_SECRET=${ZWAVEJS2MQTT_SESSION_SECRET}
+    devices:
+      - "/dev/ttyACM0:/dev/ttyACM0"
+    volumes:
+      - ${USERDIR}/docker/zwavejs2mqtt/store:/usr/src/app/store
+    ports:
+      - "8091:8091" # port for web interface
+      - "3000:3000" # port for zwave-js websocket server
+
+        #  tasmoadmin:
+        #container_name: tasmoadmin
+        #image: raymondmm/tasmoadmin:latest
+        #ports:
+        #  - "9900:80"
+        #volumes:
+        #  - ${USERDIR}/docker/tasmoadmin:/data
+
+volumes:
+  pi3b_adguard:
