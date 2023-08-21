@@ -171,6 +171,15 @@ services:
     user: 1000:1000 # default
     environment:
       - INIT_ASSETS=1 # default
+      
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+      - ${USERDIR}/uptime-kuma:/app/data
+    ports:
+      - 3001:3001  # <Host Port>:<Container Port>
+    restart: always
 
 networks:
   traefik-network:
