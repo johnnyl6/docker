@@ -156,7 +156,7 @@ services:
           size: 1000000000
     ports:
       - "5050:5000"
-      - "1935:1935" # RTMP feeds
+      - "8554:8554" # restream feeds
     environment:
       FRIGATE_RTSP_PASSWORD: ${FRIGATE_RTSP_PASSWORD}
 
