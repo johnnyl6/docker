@@ -148,7 +148,7 @@ services:
       - ${USERDIR}/frigate/config.yml:/config/config.yml:ro
       - ${USERDIR}/frigate/db:/database
       - ${USERDIR}/frigate/media:/media/frigate
-      - ${USERDIR}/frigate/go2rtc:/config/go2rtc
+      # - ${USERDIR}/frigate/go2rtc:/config/go2rtc
       - /dev/bus/usb:/dev/bus/usb
       - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
         target: /tmp/cache
