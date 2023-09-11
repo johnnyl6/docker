@@ -18,6 +18,7 @@ services:
     image: homeassistant/home-assistant:latest
     volumes:
       - ${USERDIR}/homeassistant/config:/config
+      - /run/dbus:/run/dbus:ro
     depends_on:
       - mariadb
     networks:
