@@ -31,7 +31,7 @@ services:
     expose:
       - 6666/udp
       - 6667/udp
-    restart: always
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.homeassistant.rule=Host(`${HA_HOST_NAME}`)"
