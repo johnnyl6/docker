@@ -1,0 +1,26 @@
+services:
+  webtrees:
+    image: ghcr.io/nathanvaughn/webtrees:latest
+    container_name: ${WT_CONTAINER_NAME}
+    ports:
+      - "${WT_HTTP_PORT}:80"
+    environment:
+      PRETTY_URLS: "${WT_PRETTY_URLS}"
+      HTTPS: "${WT_HTTPS}"
+      HTTPS_REDIRECT: "${WT_HTTPS_REDIRECT}"
+      LANG: "${WT_LANG}"
+      BASE_URL: "${WT_BASE_URL}"
+
+      DB_TYPE: "mysql"
+      DB_HOST: "${WT_DB_HOST}"
+      DB_PORT: "${WT_DB_PORT}"
+      DB_USER: "${WT_DB_USER}"
+      DB_PASS: "${WT_DB_PASS}"
+      DB_NAME: "${WT_DB_NAME}"
+      DB_PREFIX: "${WT_DB_PREFIX}"
+
+      PUID: "${WT_PUID}"
+      PGID: "${WT_PGID}"
+    volumes:
+      - ${WT_DATA_DIR}:/var/www/webtrees/data
+    restart: unless-stopped
