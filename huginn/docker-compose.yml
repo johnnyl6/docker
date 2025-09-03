@@ -1,6 +1,6 @@
 services:
   huginn:
-    image: huginn/huginn
+    image: ghcr.io/huginn/huginn
     ports:
       - 3000:3000
     volumes:
