@@ -4,5 +4,5 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./huginn/mysql-data:/var/lib/mysql
+      - /opt/stacks/huginn/mysql-data:/var/lib/mysql
     restart: unless-stopped
