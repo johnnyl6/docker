@@ -19,7 +19,7 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
       PAPERLESS_CONSUMER_POLLING: 180
     volumes:
-      - /opt/stacks/peperless-ngx/data:/usr/src/paperless/data
+      - /opt/stacks/paperless-ngx/data:/usr/src/paperless/data
       - /mnt/paperless/media:/usr/src/paperless/media
       - /mnt/paperless/consume:/usr/src/paperless/consume
       - /mnt/paperless/export:/usr/src/paperless/export
@@ -39,7 +39,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - /opt/stacks/peperless-ngx/pgdata15:/var/lib/postgresql/data    
+      - /opt/stacks/paperless-ngx/pgdata15:/var/lib/postgresql/data    
   tika:
      image: ghcr.io/paperless-ngx/tika:latest
      restart: unless-stopped
