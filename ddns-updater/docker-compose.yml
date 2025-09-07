@@ -1,0 +1,32 @@
+services:
+  ddns-updater:
+    image: qmcgaw/ddns-updater
+    container_name: ddns-updater
+    network_mode: bridge
+    healthcheck:
+      disable: true
+    dns: 8.8.8.8
+    ports:
+      - 8008:8000/tcp
+    volumes:
+      - /opt/stacks/ddns-updater/data:/updater/data
+    environment:
+      - CONFIG=
+      - PERIOD=5m
+      - UPDATE_COOLDOWN_PERIOD=5m
+      - PUBLICIP_FETCHERS=all
+      - PUBLICIP_HTTP_PROVIDERS=all
+      - PUBLICIPV4_HTTP_PROVIDERS=all
+      - PUBLICIPV6_HTTP_PROVIDERS=all
+      - PUBLICIP_DNS_PROVIDERS=all
+      - PUBLICIP_DNS_TIMEOUT=3s
+      - HTTP_TIMEOUT=10s
+      - LISTENING_ADDRESS=:8000
+      - ROOT_URL=/
+      - BACKUP_PERIOD=0 # 0 to disable
+      - BACKUP_DIRECTORY=/updater/data
+      - LOG_LEVEL=info
+      - LOG_CALLER=hidden
+      - TZ=${TZ}
+    restart: always
+networks: {}
