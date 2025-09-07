@@ -19,8 +19,6 @@ services:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - ${ARCHIVED_PHOTO_LOCATION}:/mnt/media/syn_johnny
       - /etc/localtime:/etc/localtime:ro
-    env_file:
-      - .env
     ports:
       - 2283:2283
     depends_on:
@@ -39,8 +37,6 @@ services:
     #   service: cpu # set to one of [armnn, cuda, openvino, openvino-wsl] for accelerated inference - use the `-wsl` version for WSL2 where applicable
     volumes:
       - model-cache:/cache
-    env_file:
-      - .env
     restart: always
     healthcheck:
       disable: false
