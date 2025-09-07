@@ -64,7 +64,7 @@ services:
         COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo
         "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
       interval: 5m
-      start_interval: 30s
+      # start_interval: 30s
       start_period: 5m
     command:
       - postgres
