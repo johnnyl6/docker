@@ -9,8 +9,30 @@ services:
       - hass_config:/config
       - /var/run/docker.sock:/var/run/docker.sock
       - /dev:/dev
-      - /etc/localtime:/etc/localtime:ro
+      
+  piper:
+    image: lscr.io/linuxserver/piper:latest
+    container_name: piper
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - PIPER_VOICE=zh_CN-huayan-medium
+      - LOCAL_ONLY= #optional
+      - PIPER_LENGTH=1.0 #optional
+      - PIPER_NOISE=0.667 #optional
+      - PIPER_NOISEW=0.333 #optional
+      - PIPER_SPEAKER=0 #optional
+      - PIPER_PROCS=1 #optional
+      - STREAMING= #optional
+    volumes:
+      - piper_data:/config
+    ports:
+      - 10200:10200
+    restart: unless-stopped      
 
 volumes:
   hass_config:
     name: hass_config
+  piper_data:
+    name: piper_data
