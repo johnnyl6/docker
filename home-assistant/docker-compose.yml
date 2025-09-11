@@ -11,10 +11,8 @@ services:
       - /dev:/dev
       
   piper:
-    image: lscr.io/linuxserver/piper:latest
+    image: rhasspy/wyoming-piper
     container_name: piper
-    environment:
-      - VOICE=zh_CN-huayan-medium
     #command: --voice zh-CN-huayan --voice en_US-amy
     volumes:
       - piper_data:/config
