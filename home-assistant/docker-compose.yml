@@ -11,26 +11,28 @@ services:
       - /dev:/dev
       
   piper:
-    image: rhasspy/wyoming-piper
     container_name: piper
-    #command: --voice zh-CN-huayan --voice en_US-amy
+    image: rhasspy/wyoming-piper
+    command: --voice zh_CN-huayan-medium
     volumes:
-      - piper_data:/config
+      - piper_data:/data
+    environment:
+      - TZ=${TZ}
+    restart: unless-stopped
     ports:
-      - 10200:10200
-    restart: unless-stopped      
+      - 10200:10200    
 
   whisper:
     container_name: whisper
     image: rhasspy/wyoming-whisper
-    restart: unless-stopped
-    ports:
-      - "10300:10300"
+    command: --model medium-int8 --language en
     volumes:
       - whisper_data:/data
     environment:
-      - MODEL=medium
-    command: --model medium --language auto
+      - TZ=${TZ}
+    restart: unless-stopped
+    ports:
+      - 10300:10300
 
 volumes:
   hass_config:
