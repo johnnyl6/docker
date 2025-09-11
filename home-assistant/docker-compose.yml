@@ -14,7 +14,7 @@ services:
     image: lscr.io/linuxserver/piper:latest
     container_name: piper
     environment:
-      - VOICE=zh-CN-huayan,en_US-amy
+      - VOICE=zh_CN-huayan-medium
     #command: --voice zh-CN-huayan --voice en_US-amy
     volumes:
       - piper_data:/config
