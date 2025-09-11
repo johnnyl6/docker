@@ -15,7 +15,7 @@ services:
     container_name: piper
     environment:
       - VOICE=zh-CN-huayan,en_US-amy
-    command: --voice zh-CN-huayan --voice en_US-amy
+    #command: --voice zh-CN-huayan --voice en_US-amy
     volumes:
       - piper_data:/config
     ports:
