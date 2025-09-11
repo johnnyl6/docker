@@ -29,7 +29,7 @@ services:
     ports:
       - "10300:10300"
     volumes:
-      - whisper-data:/data
+      - whisper_data:/data
     environment:
       - MODEL=medium
     command: --model medium --language auto
