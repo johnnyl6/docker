@@ -25,7 +25,7 @@ services:
   whisper:
     container_name: whisper
     image: rhasspy/wyoming-whisper
-    command: --model medium-int8 --language en
+    command: --model medium-int8 --language en --sample-rate 16000
     volumes:
       - whisper_data:/data
     environment:
