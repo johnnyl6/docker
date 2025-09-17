@@ -23,7 +23,8 @@ services:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload/upload
       - ${THUMBS_LOCATION}:/usr/src/app/upload/thumbs
       - ${PROFILE_LOCATION}:/usr/src/app/upload/profile
-      - ${VIDEO_LOCATION}:/usr/src/app/upload/encoded-video        
+      - ${VIDEO_LOCATION}:/usr/src/app/upload/encoded-video  
+      - ${BACKUP_LOCATION}:/usr/src/app/upload/backups
     ports:
       - 2283:2283
     depends_on:
