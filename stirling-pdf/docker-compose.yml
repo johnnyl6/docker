@@ -1,6 +1,7 @@
 services:
   stirling-pdf:
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    container_name: stirling-pdf
     ports:
       - '8088:8080'
     volumes:
