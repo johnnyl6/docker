@@ -4,11 +4,11 @@ services:
     ports:
       - '8088:8080'
     volumes:
-      - /opt/stacks/StirlingPDF/trainingData:/usr/share/tessdata # Required for extra OCR languages
-      - /opt/stacks/StirlingPDF/extraConfigs:/configs
-      - /opt/stacks/StirlingPDF/customFiles:/customFiles/
-      - /opt/stacks/StirlingPDF/logs:/logs/
-      - /opt/stacks/StirlingPDF/pipeline:/pipeline/
+      - /mnt/docker/stirlingpdf/trainingData:/usr/share/tessdata # Required for extra OCR languages
+      - /mnt/docker/stirlingpdf/extraConfigs:/configs
+      - /mnt/docker/stirlingpdf/customFiles:/customFiles/
+      - /mnt/docker/stirlingpdf/logs:/logs/
+      - /mnt/docker/stirlingpdf/pipeline:/pipeline/
     environment:
       - DISABLE_ADDITIONAL_FEATURES=false
       - LANGS=en_GB
